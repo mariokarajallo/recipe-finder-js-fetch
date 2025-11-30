@@ -64,7 +64,7 @@ function iniciarApp() {
     limpiarHTML(resultado);
 
     const header = document.createElement("H2");
-    header.classList.add("text-center", "text-black", "my-5");
+    header.classList.add("text-center", "text-black", "my-5", "fw-bold");
     header.textContent = recetas
       ? `${recetas.length} Resultados`
       : "No se encontraron resultados";
@@ -77,7 +77,7 @@ function iniciarApp() {
       recetaContenedor.classList.add("col-md-4");
 
       const recetaCard = document.createElement("DIV");
-      recetaCard.classList.add("card", "mb-4");
+      recetaCard.classList.add("card", "mb-4", "border-0", "shadow-sm");
 
       const recetaCardImagen = document.createElement("IMG");
       recetaCardImagen.classList.add("card-img-top");
@@ -88,11 +88,11 @@ function iniciarApp() {
       recetaCardBody.classList.add("card-body");
 
       const recetaCardHeading = document.createElement("H3");
-      recetaCardHeading.classList.add("card-title", "mb-3");
+      recetaCardHeading.classList.add("card-title", "mb-3", "fw-bold");
       recetaCardHeading.textContent = strMeal ?? receta.title;
 
       const recetaCardButton = document.createElement("BUTTON");
-      recetaCardButton.classList.add("btn", "btn-danger", "w-100");
+      recetaCardButton.classList.add("btn", "btn-primary", "w-100", "fw-bold");
       recetaCardButton.textContent = "Ver receta";
       //agregar manualmente el modal sin la instancia de booostrap.Modal
       // recetaCardButton.dataset.bsTarget = "#modal";
@@ -162,16 +162,24 @@ function iniciarApp() {
 
     //creamos el boton para guardar la receta a favoritos
     const btnGuardar = document.createElement("BUTTON");
-    btnGuardar.classList.add("btn", "btn-danger", "col");
-    btnGuardar.textContent = existeLocalStorage(idMeal)
-      ? "Eliminar Favorito"
-      : "Guardar Favorito";
+    btnGuardar.classList.add("btn", "col", "fw-bold");
 
+    if (existeLocalStorage(idMeal)) {
+      btnGuardar.classList.add("btn-outline-primary");
+      btnGuardar.textContent = "Eliminar Favorito";
+    } else {
+      btnGuardar.classList.add("btn-primary");
+      btnGuardar.textContent = "Guardar Favorito";
+    }
+
+    // accion del boton guardar a locaStorage
     // accion del boton guardar a locaStorage
     btnGuardar.onclick = function () {
       if (existeLocalStorage(idMeal)) {
         eliminarFavorito(idMeal);
         btnGuardar.textContent = "Guardar Favorito";
+        btnGuardar.classList.remove("btn-outline-primary");
+        btnGuardar.classList.add("btn-primary");
         mostrarToast(`Receta ${strMeal} eliminado correctamente`, "delete");
         return;
       }
@@ -182,12 +190,14 @@ function iniciarApp() {
         img: strMealThumb,
       });
       btnGuardar.textContent = "Eliminar Favorito";
+      btnGuardar.classList.remove("btn-primary");
+      btnGuardar.classList.add("btn-outline-primary");
       mostrarToast(`Receta ${strMeal} guardado correctamente`, "save");
     };
 
     // creamos el boton para cerrar el modal
     const btnCerar = document.createElement("BUTTON");
-    btnCerar.classList.add("btn", "btn-secondary", "col");
+    btnCerar.classList.add("btn", "btn-secondary", "col", "fw-bold", "ms-2");
     btnCerar.textContent = "Cerrar";
     btnCerar.onclick = function () {
       modal.hide();
@@ -234,7 +244,7 @@ function iniciarApp() {
       toastHeader.classList.remove("bg-danger");
     } else if (type === "delete") {
       toastHeader.classList.add("bg-danger", "text-white");
-      toastHeader.classList.remove("bg-successs");
+      toastHeader.classList.remove("bg-success");
     }
 
     // instanciamos el componente toast de boostrap y mostramos con el metodo show() en el html

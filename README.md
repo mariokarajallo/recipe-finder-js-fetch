@@ -1,6 +1,6 @@
 # Buscador de Recetas
 
-Aplicación web para buscar recetas de cocina por categorías, ver detalles de preparación y guardar tus favoritas.
+Aplicación web interactiva construida con HTML5, Bootstrap 5 y JavaScript (ES6+) que consume la API de TheMealDB para buscar y explorar recetas de cocina. Permite filtrar por categorías, ver instrucciones e ingredientes detallados, y gestionar una lista de favoritos persistente mediante LocalStorage, ofreciendo una experiencia de usuario fluida y responsiva.
 
 ## Demo
 
@@ -57,6 +57,7 @@ No requiere instalación de dependencias (Node.js, etc.).
 .
 ├── css
 │   └── bootstrap.min.css
+│   └── custom.css
 ├── js
 │   ├── app.js
 │   └── bootstrap.bundle.min.js
@@ -70,6 +71,7 @@ No requiere instalación de dependencias (Node.js, etc.).
 - `favoritos.html`: Página para visualizar las recetas marcadas como favoritas.
 - `js/app.js`: Contiene toda la lógica de negocio, llamadas a la API y gestión del DOM.
 - `css/bootstrap.min.css`: Archivo de estilos minificado de Bootstrap.
+- `css/custom.css`: Archivo de estilos personalizados.
 
 ## Contribuciones
 
